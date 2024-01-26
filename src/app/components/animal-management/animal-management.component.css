@@ -1,0 +1,11 @@
+#btn-add-animal {
+  margin-left: 15px;
+}
+
+.animal-name {
+  min-width: 210px;
+}
+
+li {
+    font-size: large;
+}
