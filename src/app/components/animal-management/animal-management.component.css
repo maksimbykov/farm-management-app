@@ -3,9 +3,34 @@
 }
 
 .animal-name {
-  min-width: 210px;
+  min-width: 300px;
+}
+
+.spinner {
+  margin-left: 30%;
+  margin-top: 30%;
 }
 
 li {
     font-size: large;
+}
+
+ul {
+    overflow-y: auto;
+    height: 500px;
+    background-color: azure;
+}
+
+.card {
+    max-height: 100%;
+    margin-top: 25px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

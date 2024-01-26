@@ -1,39 +1,47 @@
-<mat-card>
-  <div>
-    <h2>Animal Management</h2>
-    <ul>
-      <li *ngFor="let animal of animals">
-        {{ animal.name }}
-        <button mat-icon-button color="warn" matTooltip="Remove {{animal.name}}"
-        [matTooltipPosition]="'right'" aria-label="Remove animal" (click)="deleteAnimal(animal.name)">
-          <mat-icon>close</mat-icon>
-        </button>
-      </li>
-    </ul>
-
+<div class="container">
+  <mat-card class="card">
     <div>
-      <mat-form-field class="animal-name">
-        <mat-label>New Animal Name</mat-label>
-        <input matInput type="text" [(ngModel)]="newAnimal" />
-        <button
-          *ngIf="newAnimal"
-          matSuffix
-          mat-icon-button
-          aria-label="Clear"
-          (click)="newAnimal = ''"
-        >
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
+      <h2>Animal Management</h2>
+      <ul #scrollMe>
+        <mat-spinner class="spinner" *ngIf="busy"></mat-spinner>
+        <ng-container *ngIf="!busy">
+          <li *ngFor="let animal of animals">
+            {{ animal.name }}
+            <button mat-icon-button color="warn" matTooltip="Remove {{animal.name}}"
+            [matTooltipPosition]="'right'" aria-label="Remove animal" (click)="deleteAnimal(animal.name)">
+              <mat-icon>close</mat-icon>
+            </button>
+          </li>
+        </ng-container>
+      </ul>
+  
+      <div>
+        <mat-form-field class="animal-name">
+          <mat-label>New Animal Name</mat-label>
+          <input [disabled]="busy" (keydown)="onKeyDown($event)" matInput type="text" [(ngModel)]="newAnimal" />
+          <button
+            *ngIf="newAnimal && !busy"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="newAnimal = ''"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
 
-      <button
-        id="btn-add-animal"
-        mat-raised-button
-        color="primary"
-        (click)="addAnimal()"
-      >
-        Add Animal
-      </button>
+  
+        <button
+          id="btn-add-animal"
+          [disabled]="busy || !newAnimal"
+          mat-raised-button
+          color="primary"
+          (click)="addAnimal()"
+        >
+          Add Animal
+        </button>
+      </div>
     </div>
-  </div>
-</mat-card>
+  </mat-card>
+</div>
+
